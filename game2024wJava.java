@@ -1,0 +1,151 @@
+package gameBase;
+
+public class game2024 {
+
+  static int[][] Table4x4={
+  {2,0,6,0},
+  {0,2,6,0},
+  {2,2,0,0},
+  {4,0,4,0},
+  };
+  public static void main(String[] args) {
+   /*
+   Rotation codes
+   0 = left
+   1 = up
+   2 = right
+   3 = down
+   */
+   Move_Manage(Table4x4,0);
+  }
+  public static void Move_Manage(int[][] table,int rot)
+  {
+    for(int i=0;i<table.length;i++)
+    {
+      switch(rot)
+      {
+        case 0:
+        MoveTable_Left(table);
+        break;
+        case 1:
+        MoveTable_Up(table);
+        break;
+        case 2:
+        MoveTable_Right(table);
+        break;
+        case 3:
+        MoveTable_Down(table);
+        break;
+      }
+    }
+    ShowTable(table);
+  }
+  public static void MoveTable_Right(int[][] table)
+  {
+    int[][] preHold=table;
+    for(int i=0;i<preHold.length;i++)
+    {
+      for(int j=0;j<preHold[i].length-1;j++)
+      {
+       if(table[i][j+1]==preHold[i][j])
+       {
+        table[i][j+1]*=preHold[i][j];
+        preHold[i][j]=0;
+        }
+        if(table[i][j+1]==0)
+       {
+        table[i][j+1]=preHold[i][j];
+        preHold[i][j]=0;
+        }
+      }
+    }
+  }
+  public static void MoveTable_Left(int[][] table)
+  {
+   int[][] preHold=table;
+   // first get full arrays
+   for(int i=0;i<preHold.length;i++)
+   {
+   // 2. ; get rows , in this loop we dont need to first item
+     for(int j=1;j<preHold[i].length;j++)
+     {
+     if(table[i][j-1]==preHold[i][j])
+       {
+       table[i][j-1]*=preHold[i][j];
+       table[i][j]=0;
+       }
+       if(table[i][j-1]==0)
+       {
+         table[i][j-1]=preHold[i][j];
+         preHold[i][j]=0;
+       }
+     }
+   }
+  }
+  public static void MoveTable_Down(int[][] table)
+  {
+  // requires pre table for manage numbers 
+   // you can also change this to directyl edit from table
+    int[][] preHold=table;
+    // works with =( normal length - 1) and this is gives ability for access whole table
+    for(int i=0;i<preHold.length-1;i++)
+    {
+      for(int j=0;j<preHold[i].length;j++)
+      {
+      if(table[i+1][j]==preHold[i][j])
+        {
+        table[i+1][j]*=preHold[i][j];
+        table[i][j]=0;
+        }
+        // if cell is empty move number to that cell
+       if(table[i+1][j]==0)
+       {
+         table[i+1][j]=preHold[i][j];
+         preHold[i][j]=0;
+       }
+      }
+    }
+  }
+  public static void MoveTable_Up(int[][] table)
+  {
+    int[][] preHold=table;
+    for(int i=1;i<preHold.length;i++)
+    {
+      for(int j=0;j<preHold[i].length;j++)
+      {
+      if(table[i-1][j]==preHold[i][j])
+        {
+        	table[i-1][j]*=preHold[i][j];
+        	table[i][j]=0;
+        }
+        if(table[i-1][j]==0)
+        {
+          table[i-1][j]=preHold[i][j];
+          preHold[i][j]=0;
+        }
+        
+      }
+    }
+  }
+  public static void ShowTable(int[][] table)
+  {
+    cwl("Table Item Count    :"+table.length);
+    cwl("Table [0][0] Length :"+table[0].length);
+    for(int i=0;i<table.length;i++)
+    {
+      for(int j=0;j<table[i].length;j++)
+      {
+        cw(table[i][j]+" ");
+      }
+      cwl("");
+    }
+  }
+  public static void cwl(Object obj)
+  {
+    System.out.println(obj);
+  }
+  public static void cw(Object obj)
+  {
+    System.out.print(obj);
+  }
+}
