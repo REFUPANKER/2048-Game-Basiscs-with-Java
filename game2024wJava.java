@@ -1,5 +1,9 @@
 package gameBase;
 
+import java.util.Random;
+import java.util.Scanner;
+
+
 public class game2024 {
 
   static int[][] Table4x4={
@@ -16,7 +20,29 @@ public class game2024 {
    2 = right
    3 = down
    */
-   Move_Manage(Table4x4,0);
+   ShowTable(Table4x4);
+   cwl("0:left \n1:up \n2:right \n3:down");
+   Scanner sc=new Scanner(System.in);
+   String Uinput="";
+   while(Uinput.replace(" ","").equals("e")==false)
+   {
+     Uinput=sc.next();
+     switch(Uinput)
+     {
+       case "0":
+        Move_Manage(Table4x4,0);
+       break;
+       case "1":
+        Move_Manage(Table4x4,1);
+       break;
+       case "2":
+        Move_Manage(Table4x4,2);
+       break;
+       case "3":
+        Move_Manage(Table4x4,3);
+       break;
+     }
+   }
   }
   public static void Move_Manage(int[][] table,int rot)
   {
@@ -38,90 +64,86 @@ public class game2024 {
         break;
       }
     }
+    
+    
     ShowTable(table);
   }
   public static void MoveTable_Right(int[][] table)
   {
-    int[][] preHold=table;
-    for(int i=0;i<preHold.length;i++)
+    for(int i=0;i<table.length;i++)
     {
-      for(int j=0;j<preHold[i].length-1;j++)
+      for(int j=0;j<table[i].length-1;j++)
       {
-       if(table[i][j+1]==preHold[i][j])
+       if(table[i][j+1]==table[i][j])
        {
-        table[i][j+1]*=preHold[i][j];
-        preHold[i][j]=0;
+        table[i][j+1]*=table[i][j];
+        table[i][j]=0;
         }
         if(table[i][j+1]==0)
        {
-        table[i][j+1]=preHold[i][j];
-        preHold[i][j]=0;
+        table[i][j+1]=table[i][j];
+        table[i][j]=0;
         }
       }
     }
   }
   public static void MoveTable_Left(int[][] table)
   {
-   int[][] preHold=table;
    // first get full arrays
-   for(int i=0;i<preHold.length;i++)
+   for(int i=0;i<table.length;i++)
    {
    // 2. ; get rows , in this loop we dont need to first item
-     for(int j=1;j<preHold[i].length;j++)
+     for(int j=1;j<table[i].length;j++)
      {
-     if(table[i][j-1]==preHold[i][j])
+     if(table[i][j-1]==table[i][j])
        {
-       table[i][j-1]*=preHold[i][j];
+       table[i][j-1]*=table[i][j];
        table[i][j]=0;
        }
        if(table[i][j-1]==0)
        {
-         table[i][j-1]=preHold[i][j];
-         preHold[i][j]=0;
+         table[i][j-1]=table[i][j];
+         table[i][j]=0;
        }
      }
    }
   }
   public static void MoveTable_Down(int[][] table)
   {
-  // requires pre table for manage numbers 
-   // you can also change this to directyl edit from table
-    int[][] preHold=table;
     // works with =( normal length - 1) and this is gives ability for access whole table
-    for(int i=0;i<preHold.length-1;i++)
+    for(int i=0;i<table.length-1;i++)
     {
-      for(int j=0;j<preHold[i].length;j++)
+      for(int j=0;j<table[i].length;j++)
       {
-      if(table[i+1][j]==preHold[i][j])
+      if(table[i+1][j]==table[i][j])
         {
-        table[i+1][j]*=preHold[i][j];
+        table[i+1][j]*=table[i][j];
         table[i][j]=0;
         }
         // if cell is empty move number to that cell
        if(table[i+1][j]==0)
        {
-         table[i+1][j]=preHold[i][j];
-         preHold[i][j]=0;
+         table[i+1][j]=table[i][j];
+         table[i][j]=0;
        }
       }
     }
   }
   public static void MoveTable_Up(int[][] table)
   {
-    int[][] preHold=table;
-    for(int i=1;i<preHold.length;i++)
+    for(int i=1;i<table.length;i++)
     {
-      for(int j=0;j<preHold[i].length;j++)
+      for(int j=0;j<table[i].length;j++)
       {
-      if(table[i-1][j]==preHold[i][j])
+      if(table[i-1][j]==table[i][j])
         {
-        	table[i-1][j]*=preHold[i][j];
+        	table[i-1][j]*=table[i][j];
         	table[i][j]=0;
         }
         if(table[i-1][j]==0)
         {
-          table[i-1][j]=preHold[i][j];
-          preHold[i][j]=0;
+          table[i-1][j]=table[i][j];
+          table[i][j]=0;
         }
         
       }
