@@ -1,4 +1,4 @@
-# 2024-Game-Basiscs-with-Java
+# 2048-Game-Basiscs-with-Java
 ---
 <br>i recreated 2024 game's basics for more experience for me
 <br>but you need to add input system 
