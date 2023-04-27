@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class game2024 {
+public class game2048 {
 
   static int[][] Table4x4={
   {2,0,6,0},
