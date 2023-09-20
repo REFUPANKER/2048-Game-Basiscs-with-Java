@@ -1,6 +1,6 @@
 # 2048-Game-Basiscs-with-Java
 ---
-<br>i recreated 2024 game's basics for more experience for me
+<br>i recreated 2048 game's basics for more experience for me
 <br>but you need to add input system 
 <br>if user writes 2 -> move table to right
 ```
